@@ -231,13 +231,25 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                                       top: Radius.circular(24),
                                     ),
                                   ),
+                                  // Eski Row ve içindekileri silip yerine doğrudan dökümandaki resmi basıyoruz:
                                   child: ClipRRect(
-                                    borderRadius: const BorderRadius.vertical(
-                                      top: Radius.circular(24),
-                                    ),
-                                    child: Image.asset(
-                                      product.imageUrl,
+                                    borderRadius: BorderRadius.circular(20),
+                                    child: Image.network(
+                                      'https://wantapi.com/assets/banner.png',
                                       fit: BoxFit.cover,
+                                      errorBuilder: (context, error, stackTrace) {
+                                        // Eğer link gelecekte patlarsa arayüz bozulmasın diye yedek tasarım:
+                                        return Container(
+                                          color: const Color(0xFFE9ECEF),
+                                          alignment: Alignment.center,
+                                          child: const Text(
+                                            'GIFT STORE - %20 İndirim Fırsatı!',
+                                            style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
+                                        );
+                                      },
                                     ),
                                   ),
                                 ),
